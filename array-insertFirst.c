@@ -6,13 +6,18 @@ char *insertFirst(char A[], int n, char x);
 
 int main()
 {
+    // Scenario 1: Array is not full
     char arr[MAX] = {'c', 'z', 'j', 'v'};
     int size = 4; // Actual size of the array
+
+    // Scenario 2: Array is full
+    // char arr[MAX] = {'c', 'z', 'j', 'v', 'q'};
+    // int size = 5;
 
     printf("Before insertion:\n");
     displayArr(arr);
 
-    printf("\nAfter insertion:\n");
+    printf("\n\nAfter insertion:\n");
     char *newArr = insertFirst(arr, size, 'b');
     displayArr(newArr);
 
@@ -32,7 +37,7 @@ char *insertFirst(char A[], int n, char x)
 {
     int nDex;
 
-    if (n < MAX)
+    if (n < MAX) // Allowed to insert
     {
         for (nDex = n; nDex > 0; nDex--)
         {
@@ -42,8 +47,11 @@ char *insertFirst(char A[], int n, char x)
     }
     else
     {
-        printf("Array is full.");
+        printf("Array is full.\n");
     }
 
-    return A;
+    return A; /* Does it need *?
+    No, because the array holds the address of the first element.
+    Adding *A will be dereferencing.
+    */
 }
