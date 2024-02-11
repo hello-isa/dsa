@@ -51,6 +51,16 @@ void displayList(LIST L)
 void insertFirst(LIST *L, char X)
 {
     LIST newNode = (LIST)malloc(sizeof(struct node));
+    /*
+    Why does type casting in malloc needs a pointer?
+
+    malloc returns a pointer to the beginning of a block of memory.
+    Since malloc returns a pointer to void `(void *)`, type casting
+    allows you to convert this generic pointer to a desired pointer.
+
+    In this cast LIST is already a pointer to a structure hence no need to type cast.
+    */
+
     if (newNode != NULL)
     {
         newNode->elem = X;
