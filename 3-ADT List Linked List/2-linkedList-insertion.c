@@ -8,9 +8,14 @@ typedef struct node
 } *LIST;
 
 void displayList(LIST L);
+
+// Insertion
 void insertFirst(LIST *L, char X);
 void insertLast(LIST *L, char X);
 void insertPos(LIST *L, char X, int position);
+
+// Deletion
+void deleteFirst(LIST *L);
 
 int main()
 {
@@ -34,6 +39,11 @@ int main()
 
     printf("\nInsert at position 4:\n");
     insertPos(&LL, 'H', 4);
+    displayList(LL);
+
+    printf("\nDelete first:\n");
+    deleteFirst(&LL);
+    deleteFirst(&LL);
     displayList(LL);
 
     return 0;
@@ -125,4 +135,19 @@ void insertPos(LIST *L, char X, int position)
     LIST temp = *trav;
     newNode->link = temp;
     *trav = newNode;
+}
+
+void deleteFirst(LIST *L)
+{
+    if (*L == NULL) // Scenario 1: List is empty
+    {
+        printf("List is empty.\n");
+    }
+    else
+    {
+        // Scenario 2: List is not empty
+        LIST temp = *L;
+        *L = temp->link; // L is a pointer to a pointer to a node hence you need to dereference it
+        free(temp);
+    }
 }
