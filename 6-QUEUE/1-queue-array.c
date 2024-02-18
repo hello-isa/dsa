@@ -1,3 +1,4 @@
+// Array list version 4 implementation
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 5
