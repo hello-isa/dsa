@@ -13,7 +13,7 @@ typedef struct node
 void initializeQueue(QUEUE *Q);
 void displayQueue(QUEUE Q);
 void enqueue(QUEUE Q, char elem);
-char dequeue(QUEUE Q);
+char dequeue(QUEUE Q); // Dequeue returns none, this is for experiment only
 
 int main()
 {
