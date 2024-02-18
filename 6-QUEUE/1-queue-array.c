@@ -12,6 +12,7 @@ typedef struct node
 void initializeQueue(QUEUE *Q);
 void displayQueue(QUEUE Q);
 void enqueue(QUEUE Q, char elem);
+char dequeue(QUEUE Q);
 
 int main()
 {
@@ -23,6 +24,24 @@ int main()
     enqueue(QQ, 'B');
     displayQueue(QQ);
     enqueue(QQ, 'C');
+    displayQueue(QQ);
+    enqueue(QQ, 'D');
+    displayQueue(QQ);
+    enqueue(QQ, 'E');
+    displayQueue(QQ);
+    enqueue(QQ, 'F');
+    displayQueue(QQ);
+
+    char dequeued1 = dequeue(QQ);
+    printf("Dequeued element: %c\n", dequeued1);
+    displayQueue(QQ);
+
+    char dequeued2 = dequeue(QQ);
+    printf("Dequeued element: %c\n", dequeued2);
+    displayQueue(QQ);
+
+    char dequeued3 = dequeue(QQ);
+    printf("Dequeued element: %c\n", dequeued3);
     displayQueue(QQ);
 
     return 0;
@@ -52,16 +71,45 @@ void displayQueue(QUEUE Q)
 
 void enqueue(QUEUE Q, char elem)
 {
-    if (Q->front == -1)
+    if (Q->rear == MAX - 1)
     {
-        // Only 1 element in the queue, front = rear
-        Q->front += 1;
-        Q->rear = Q->front;
-        Q->elemPtr[Q->rear] = elem;
+        printf("Queue is FULL.\n");
     }
     else
     {
-        Q->rear += 1;
-        Q->elemPtr[Q->rear] = elem;
+        if (Q->front == -1)
+        {
+            // Only 1 element in the queue, front = rear
+            Q->front += 1;
+            Q->rear = Q->front;
+            Q->elemPtr[Q->rear] = elem;
+        }
+        else
+        {
+            Q->rear += 1;
+            Q->elemPtr[Q->rear] = elem;
+        }
+    }
+}
+
+char dequeue(QUEUE Q)
+{
+    if (Q->rear == -1)
+    {
+        printf("Queue is EMPTY.\n");
+    }
+    else
+    {
+        char elem = Q->elemPtr[Q->front];
+
+        int count;
+        for (count = 0; count < Q->rear; count++) // Shifting
+        {
+            Q->elemPtr[count] = Q->elemPtr[count + 1];
+        }
+
+        Q->rear--; // Decrement rear
+
+        return elem;
     }
 }
