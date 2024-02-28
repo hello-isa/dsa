@@ -33,10 +33,15 @@ int main()
     displayDictionary(A);
 
     insert(A, 20);
-    // insert(A, 0);
-    // insert(A, 30);
-    // insert(A, 13);
-    // insert(A, 33);
+    insert(A, 0);
+    insert(A, 30);
+    insert(A, 13);
+    insert(A, 33);
+    insert(A, 45);
+    insert(A, 108);
+    insert(A, 28);
+    insert(A, 48);
+    //    insert(A, 20);
     displayDictionary(A);
 
     return 0;
@@ -59,11 +64,12 @@ void displayDictionary(Dictionary D)
     printf("SET #\n");
     for (n = 0; n < MAX; n++)
     {
-        printf("%d:\n", n);
+        printf("%d:\t", n);
         for (trav = D[n]; trav != NULL; trav = trav->link)
         {
             printf("%d\t", trav->elem);
         }
+        printf("\n");
     }
     printf("\n");
 }
@@ -117,8 +123,11 @@ void insert(Dictionary D, int elem)
         int pos = hash(elem);
 
         SET *trav, temp;
-        for (trav = D[pos]; *trav != NULL && (*trav)->elem < newNode->elem; trav = &(*trav)->link)
+        for (trav = &(D[pos]); *trav != NULL && (*trav)->elem < newNode->elem; trav = &(*trav)->link)
         {
         }
+        temp = *trav;
+        newNode->link = temp;
+        *trav = newNode;
     }
 }
