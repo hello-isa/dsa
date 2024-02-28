@@ -16,6 +16,7 @@
 | Queue          | Array (v1, v2, v3, v4); Circular Array (v1, v2, v3, v4); Linked List     | -     |
 
 **2. Abstract Data Type Set**
+
 **ADTs Based on SET**
 * ADT UID (Union, Intersection, Difference)
 * Dictionary
