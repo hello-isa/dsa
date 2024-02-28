@@ -24,5 +24,5 @@
 
 | Data Structures| Implementation or Representation in Memory                               | Notes  |
 | -------------- |:------------------------------------------------------------------------:| -----:|
-| ADT UID        | Array; Linked List; Cursor Based; Bit Vector; Computer Word              | -     |
-| Dictionary     | Open (or External) Hashing (or Mapping); Closed (or Internal) Hashing    | -     |
+| ADT UID        | Array, Linked List, Cursor Based, Bit Vector, Computer Word              | -     |
+| Dictionary     | Open (or External) Hashing (or Mapping), Closed (or Internal) Hashing    | -     |
