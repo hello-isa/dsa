@@ -132,7 +132,7 @@ void insert(Dictionary D, char elem)
     // If cell iS DELETED or contains an element, look for the nearest EMPTY cell
     if (D[pos] == DELETED)
     {
-        for (n = pos; n < pos; n = (n + 1) % MAX)
+        for (n = (pos + 1) % MAX; n != pos; n = (n + 1) % MAX)
         {
         }
         D[n] = elem;
