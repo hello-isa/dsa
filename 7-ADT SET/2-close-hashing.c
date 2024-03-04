@@ -13,8 +13,10 @@ typedef enum
 } Boolean;
 
 // Function prototype
-void initDictionary(Dictionary D);
-void displayDictionary(Dictionary D);
+void initDictionary(Dictionary D);    // Initialize Dictionary to be EMPTY
+void displayDictionary(Dictionary D); // Display the content of the Dictionary
+int hash(char elem);                  // Return the arbitrary hash values
+void insert(Dictionary D, char elem); // Insert an element into the Dictionary
 
 int main()
 {
@@ -45,8 +47,33 @@ void displayDictionary(Dictionary D)
     printf("Index\tElement\n");
     for (n = 0; n < MAX; n++)
     {
-
-        printf("%d:\t\t[ %c ]\n", n, D[n]);
+        if (D[n] == EMPTY)
+        {
+            printf("%d:\t\t[ EMPTY ]\n", n);
+        }
+        else if (D[n] == DELETED)
+        {
+            printf("%d:\t\t[ DELETED ]\n", n);
+        }
+        else
+        {
+            printf("%d:\t\t[ %c ]\n", n, D[n]);
+        }
     }
     printf("\n");
+}
+
+int hash(char elem)
+{
+    /*
+    Arbitrary hash values
+    a - 3
+    b - 9
+    c - 4
+    d - 3
+    e - 9
+    f - 0
+    g - 1
+    j - 3
+    */
 }
