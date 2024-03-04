@@ -13,10 +13,12 @@ typedef enum
 } Boolean;
 
 // Function prototype
-void initDictionary(Dictionary D);    // Initialize Dictionary to be EMPTY
-void displayDictionary(Dictionary D); // Display the content of the Dictionary
-int hash(char elem);                  // Return the arbitrary hash values
-void insert(Dictionary D, char elem); // Insert an element into the Dictionary
+void initDictionary(Dictionary D);         // Initialize Dictionary to be EMPTY
+void displayDictionary(Dictionary D);      // Display the content of the Dictionary
+int hash(char elem);                       // Returns the arbitrary hash values
+void insert(Dictionary D, char elem);      // Insert an element into the Dictionary
+void delete(Dictionary D, char elem);      // Delete an element from the Dictionary
+Boolean isMember(Dictionary D, char elem); // Returns TRUE if an element is a member of the Dictionary; else FALSE
 
 int main()
 {
@@ -24,6 +26,14 @@ int main()
 
     // Function call
     initDictionary(A);
+    displayDictionary(A);
+
+    insert(A, 'a');
+    insert(A, 'b');
+    insert(A, 'c');
+    insert(A, 'd');
+    insert(A, 'e');
+    insert(A, 'f');
     displayDictionary(A);
 
     return 0;
@@ -103,4 +113,42 @@ int hash(char elem)
     }
 
     return hashValue;
+}
+
+void insert(Dictionary D, char elem)
+{
+    // Implemented in circular array
+    // Cell is either EMPTY, DELETED or has an element
+
+    int pos = hash(elem); // Determine the index where to insert the elements
+    int n;
+
+    // If cell is EMPTY, insert immediately
+    if (D[pos] == EMPTY)
+    {
+        D[pos] = elem;
+    }
+
+    // If cell iS DELETED or contains an element, look for the nearest EMPTY cell
+    if (D[pos] == DELETED)
+    {
+        for (n = pos; n < pos; n = (n + 1) % MAX)
+        {
+        }
+        D[n] = elem;
+    }
+
+    /*
+    Expected output should be:
+        0: e
+        1: f
+        2: EMPTY
+        3: a
+        4: c
+        5: d
+        6: EMPTY
+        7: EMPTY
+        8: EMPTY
+        9: b
+    */
 }
