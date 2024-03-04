@@ -65,15 +65,42 @@ void displayDictionary(Dictionary D)
 
 int hash(char elem)
 {
-    /*
-    Arbitrary hash values
-    a - 3
-    b - 9
-    c - 4
-    d - 3
-    e - 9
-    f - 0
-    g - 1
-    j - 3
-    */
+    int hashValue;
+
+    // Arbitrary values
+    switch (elem)
+    {
+    case 'a':
+        hashValue = 3;
+        break;
+    case 'b':
+        hashValue = 9;
+        break;
+    case 'c':
+        hashValue = 4;
+        break;
+    case 'd':
+        hashValue = 3;
+        break;
+    case 'e':
+        hashValue = 9;
+        break;
+    case 'f':
+        hashValue = 0;
+        break;
+    case 'g':
+        hashValue = 1;
+        break;
+    case 'h':
+        hashValue = 3;
+        break;
+    case 'i':
+        hashValue = 0;
+        break;
+    case 'j':
+        hashValue = 3;
+        break;
+    }
+
+    return hashValue;
 }
