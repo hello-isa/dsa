@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
-#define MAX 10
+#define MAX 0xA
 #define EMPTY '-'
 #define DELETED '*'
 
@@ -44,10 +44,11 @@ int main()
     displayDictionary(A);
 
     delete (A, 'a');
-    delete (A, 'c'); // Hash value is 2 but the dictionary contains 'b'
+    delete (A, 'c'); // Hash value is 2 but the dictionary contains 'b' so it needs to look for 'c'
     delete (A, 'g');
     delete (A, 'h');
-    delete (A, 'a'); // Cannot delete
+    delete (A, 'a'); // Hash value is 0 but is already deleted so it needs to look for 'a'
+    delete (A, 'a');
     displayDictionary(A);
 
     return 0;
@@ -111,14 +112,21 @@ void insert(Dictionary D, char elem)
 
 void delete(Dictionary D, char elem)
 {
-    int n = hash(elem);
+    int n, count;
 
-    if (D[n] != EMPTY && D[n] != DELETED)
+    for (n = hash(elem), count = 0; count < MAX && D[n] != elem; n = (n + 1) % MAX, count++)
+    {
+    }
+    if (D[n] == elem)
     {
         D[n] = DELETED;
     }
     else
     {
-        printf("Deletion is not allowed. Cell is either EMPTY or DELETED.\n");
+        printf("Deletion is NOT allowed. '%c' may have been already or is not in the Dictionary.\n", elem);
     }
+}
+
+Boolean isMember(Dictionary D, char elem)
+{
 }
