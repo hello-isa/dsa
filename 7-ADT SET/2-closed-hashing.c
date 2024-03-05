@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #define MAX 10
 #define EMPTY '-'
 #define DELETED '*'
@@ -30,10 +31,15 @@ int main()
 
     insert(A, 'a');
     insert(A, 'b');
-    insert(A, 'c');
+    insert(A, 'b');
     insert(A, 'd');
+    insert(A, 'c');
+    insert(A, 'g');
+    insert(A, 'j');
     insert(A, 'e');
-    insert(A, 'f');
+    insert(A, 'a');
+    insert(A, 'h');
+    insert(A, 'i');
     displayDictionary(A);
 
     return 0;
@@ -75,80 +81,22 @@ void displayDictionary(Dictionary D)
 
 int hash(char elem)
 {
-    int hashValue;
-
-    // Arbitrary values
-    switch (elem)
-    {
-    case 'a':
-        hashValue = 3;
-        break;
-    case 'b':
-        hashValue = 9;
-        break;
-    case 'c':
-        hashValue = 4;
-        break;
-    case 'd':
-        hashValue = 3;
-        break;
-    case 'e':
-        hashValue = 9;
-        break;
-    case 'f':
-        hashValue = 0;
-        break;
-    case 'g':
-        hashValue = 1;
-        break;
-    case 'h':
-        hashValue = 3;
-        break;
-    case 'i':
-        hashValue = 0;
-        break;
-    case 'j':
-        hashValue = 3;
-        break;
-    }
-
-    return hashValue;
+    return tolower(elem - 'a');
 }
 
 void insert(Dictionary D, char elem)
 {
-    // Implemented in circular array
-    // Cell is either EMPTY, DELETED or has an element
+    int n, count;
 
-    int pos = hash(elem); // Determine the index where to insert the elements
-    int n;
-
-    // If cell is EMPTY, insert immediately
-    if (D[pos] == EMPTY)
+    for (n = hash(elem), count = 0; D[n] != EMPTY && D[n] != DELETED && count < MAX; n = (n + 1) % MAX, count++)
     {
-        D[pos] = elem;
     }
-
-    // If cell iS DELETED or contains an element, look for the nearest EMPTY cell
-    if (D[pos] == DELETED)
+    if (count < MAX)
     {
-        for (n = (pos + 1) % MAX; n != pos; n = (n + 1) % MAX)
-        {
-        }
         D[n] = elem;
     }
-
-    /*
-    Expected output should be:
-        0: e
-        1: f
-        2: EMPTY
-        3: a
-        4: c
-        5: d
-        6: EMPTY
-        7: EMPTY
-        8: EMPTY
-        9: b
-    */
+    else
+    {
+        printf("Dictionary is FULL. Cannot insert '%c'.\n", elem);
+    }
 }
