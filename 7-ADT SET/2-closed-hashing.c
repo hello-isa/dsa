@@ -44,7 +44,7 @@ int main()
     displayDictionary(A);
 
     delete (A, 'a');
-    delete (A, 'c');
+    delete (A, 'c'); // Hash value is 2 but the dictionary contains 'b'
     delete (A, 'g');
     delete (A, 'h');
     delete (A, 'a'); // Cannot delete
