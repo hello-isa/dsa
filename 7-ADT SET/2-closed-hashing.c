@@ -39,7 +39,15 @@ int main()
     insert(A, 'e');
     insert(A, 'a');
     insert(A, 'h');
-    insert(A, 'i');
+    insert(A, 'i'); // Cannot insert, dictionary is full
+    insert(A, 'k'); // Cannot insert, dictionary is full
+    displayDictionary(A);
+
+    delete (A, 'a');
+    delete (A, 'c');
+    delete (A, 'g');
+    delete (A, 'h');
+    delete (A, 'a'); // Cannot delete
     displayDictionary(A);
 
     return 0;
@@ -98,5 +106,19 @@ void insert(Dictionary D, char elem)
     else
     {
         printf("Dictionary is FULL. Cannot insert '%c'.\n", elem);
+    }
+}
+
+void delete(Dictionary D, char elem)
+{
+    int n = hash(elem);
+
+    if (D[n] != EMPTY && D[n] != DELETED)
+    {
+        D[n] = DELETED;
+    }
+    else
+    {
+        printf("Deletion is not allowed. Cell is either EMPTY or DELETED.\n");
     }
 }
