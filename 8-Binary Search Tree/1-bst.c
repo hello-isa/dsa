@@ -10,14 +10,17 @@ typedef struct node
 
 typedef enum
 {
-    F,
-    T
+    False,
+    True
 } Boolean;
 
 // Function prototype
 void preorder(BST T);              // Traverse the tree in preorder manner
+void postorder(BST T);             // Traverse the tree in postorder manner
+void inorder(BST T);               // Traverse the tree in inorder manner
 void initialize(BST *T);           // Initialize an empty tree
 Boolean isMember(BST T, int elem); // Check if an element is a member of the tree
+BST createNode(int elem);          // Create node
 void insert(BST *T, int elem);     // Insert an element into its proper position in the tree
 void delete(BST *T, int elem);     // Delete an element from the tree
 
@@ -35,7 +38,17 @@ int main()
     insert(&root, 71);
     insert(&root, 40);
 
+    printf("Preorder Traversal:\n");
     preorder(root);
+
+    printf("\n\nPostorder Traversal:\n");
+    postorder(root);
+
+    printf("\n\nInorder Traversal:\n");
+    inorder(root);
+
+    printf("\n\nInsert 71:\n");
+    insert(&root, 71);
 
     return 0;
 }
@@ -51,12 +64,57 @@ void preorder(BST T)
     }
 }
 
+void postorder(BST T)
+{
+    if (T != NULL)
+    {
+        postorder(T->LC);
+        postorder(T->RC);
+        printf("%d ", T->data);
+    }
+}
+
+void inorder(BST T)
+{
+    if (T != NULL)
+    {
+        inorder(T->LC);
+        printf("%d ", T->data);
+        inorder(T->RC);
+    }
+}
+
 void initialize(BST *T)
 {
     *T = NULL;
 }
 
-void insert(BST *T, int elem)
+Boolean isMember(BST T, int elem)
+{
+    BST trav = T;
+    Boolean found = False;
+
+    // Traverse the tree until we reach a leaf node or find the element
+    while (trav != NULL && !found)
+    {
+        if (elem == trav->data)
+        {
+            found = True; // Set found to True if element is found
+        }
+        else if (elem < trav->data)
+        {
+            trav = trav->LC; // Move to the left child
+        }
+        else
+        {
+            trav = trav->RC; // Move to the right child
+        }
+    }
+
+    return found; // Return whether the element is found or not
+}
+
+BST createNode(int elem)
 {
     // Create new node
     BST newNode = (BST)calloc(1, sizeof(struct node));
@@ -69,38 +127,57 @@ void insert(BST *T, int elem)
         printf("Memory allocation failed.");
     }
 
+    return newNode;
+}
+
+void insert(BST *T, int elem)
+{
     // Scenario 1: Tree is empty
     if (*T == NULL)
     {
+        // Create node
+        BST newNode = createNode(elem);
         *T = newNode;
     }
     else
     {
         // Scenario 2: Tree is NOT empty
-        BST trav = *T;
-        BST parent = NULL;
 
-        while (trav != NULL)
+        // Check first if element is a member OR not
+        if (isMember(*T, elem) == False)
         {
-            parent = trav; // Update parent pointer
-            if (elem <= trav->data)
+            BST trav = *T;
+            BST parent = NULL;
+
+            while (trav != NULL)
             {
-                trav = trav->LC;
+                parent = trav; // Update parent pointer
+                if (elem <= trav->data)
+                {
+                    trav = trav->LC;
+                }
+                else
+                {
+                    trav = trav->RC;
+                }
+            }
+
+            // Create node
+            BST newNode = createNode(elem);
+
+            // Now, 'parent' points to the parent of the new node
+            if (elem <= parent->data)
+            {
+                parent->LC = newNode;
             }
             else
             {
-                trav = trav->RC;
+                parent->RC = newNode;
             }
-        }
-
-        // Now, 'parent' points to the parent of the new node
-        if (elem <= parent->data)
-        {
-            parent->LC = newNode;
         }
         else
         {
-            parent->RC = newNode;
+            printf("Element exists in the tree. Insertion not allowed.\n");
         }
     }
 }
