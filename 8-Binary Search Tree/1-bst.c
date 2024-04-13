@@ -67,40 +67,40 @@ void insert(BST *T, int elem)
     else
     {
         printf("Memory allocation failed.");
-        return; // Exit the function if memory allocation fails
     }
 
     // Scenario 1: Tree is empty
     if (*T == NULL)
     {
         *T = newNode;
-        return; // Insertion done, exit the function
-    }
-
-    // Scenario 2: Tree is NOT empty
-    BST trav = *T;
-    BST parent = NULL;
-
-    while (trav != NULL)
-    {
-        parent = trav; // Update parent pointer
-        if (elem <= trav->data)
-        {
-            trav = trav->LC;
-        }
-        else
-        {
-            trav = trav->RC;
-        }
-    }
-
-    // Now, 'parent' points to the parent of the new node
-    if (elem <= parent->data)
-    {
-        parent->LC = newNode;
     }
     else
     {
-        parent->RC = newNode;
+        // Scenario 2: Tree is NOT empty
+        BST trav = *T;
+        BST parent = NULL;
+
+        while (trav != NULL)
+        {
+            parent = trav; // Update parent pointer
+            if (elem <= trav->data)
+            {
+                trav = trav->LC;
+            }
+            else
+            {
+                trav = trav->RC;
+            }
+        }
+
+        // Now, 'parent' points to the parent of the new node
+        if (elem <= parent->data)
+        {
+            parent->LC = newNode;
+        }
+        else
+        {
+            parent->RC = newNode;
+        }
     }
 }
