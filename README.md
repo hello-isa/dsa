@@ -26,3 +26,9 @@
 | -------------- |:------------------------------------------------------------------------:| -----:|
 | ADT UID        | Array, Linked List, Cursor Based, Bit Vector, Computer Word              | -     |
 | Dictionary     | Open (or External) Hashing (or Mapping), Closed (or Internal) Hashing    | -     |
+
+**3. Trees**
+| Data Structures| Implementation or Representation in Memory                               | Notes  |
+| -------------------- |:------------------------------------------------------------------:| -----:|
+| Binary Tree          | Linked List, Cursor Based                                          | -     |
+| Binary Search Tree   | Linked List, Cursor Based                                          | -     |
